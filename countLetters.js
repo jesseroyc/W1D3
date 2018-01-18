@@ -5,6 +5,7 @@ const countLetters = function findAllUniqueChars(checkIt) {
 		stringChars:     checkIt.split(''),
 		uniqueChars:     checkIt.split('').filter(onlyUnique),
 		instancesFound:  checkIt.split('').filter(onlyUnique),
+		positions:       [], 
 	}
 
 	function onlyUnique(value, index, self) { 
@@ -17,15 +18,22 @@ const countLetters = function findAllUniqueChars(checkIt) {
 
 		stringStats.instancesFound[index] = 0;
 
+		let indexP = 0;
 		stringStats.stringChars.forEach(function (sChar) {
 
 			if(uChar === sChar) {
 				stringStats.instancesFound[index] ++;
+				stringStats.positions.push(indexP);
 			}
+			indexP++;
+
 		});
 
-		console.log(stringStats.uniqueChars[index] + ": " + stringStats.instancesFound[index] + ",");
+		console.log(stringStats.uniqueChars[index] + 
+			": " + stringStats.instancesFound[index] + ", found in array index positions: "
+			+ stringStats.positions);
 		index ++;
+		stringStats.positions.length = 0;
 	});
 
 	console.log('');
