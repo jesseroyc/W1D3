@@ -2,28 +2,41 @@ const countLetters = function findAllUniqueChars(checkIt) {
 
 	const stringStats = {
 		
-		
+		stringChars:     checkIt.split(''),
 		uniqueChars:     checkIt.split('').filter(onlyUnique),
 		instancesFound:  checkIt.split('').filter(onlyUnique),
-
-		keyStore() {
-
-		},
-
-		output() {
-
-			console.log(this.uniqueChar + ": " + this.instancesFound + ",");
-		},
 	}
 
 	function onlyUnique(value, index, self) { 
     	return self.indexOf(value) === index;
 	}
 
-	console.log(stringStats.uniqueChars);
+	index = 0;
+
+	stringStats.uniqueChars.forEach(function (uChar) {
+
+		stringStats.instancesFound[index] = 0;
+
+		stringStats.stringChars.forEach(function (sChar) {
+
+			if(uChar === sChar) {
+				stringStats.instancesFound[index] ++;
+			}
+		});
+
+		console.log(stringStats.uniqueChars[index] + ": " + stringStats.instancesFound[index] + ",");
+		index ++;
+	});
+
+	console.log('');
 
 	return stringStats;
 
 }
 
-countLetters("blahhffsad");
+
+const test = process.argv.slice(2)
+
+test.forEach(function (test) {
+	countLetters(test);
+});
